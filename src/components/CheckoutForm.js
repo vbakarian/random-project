@@ -10,13 +10,13 @@ class CheckoutForm extends Component {
 
   async submit(ev) {
     let { token } = await this.props.stripe.createToken({ name: "Name" });
-    let response = await fetch("http://localhost:9000/charge", {
+    let response = await fetch(".netlify/functions/charge", {
       method: "POST",
       headers: { "Content-Type": "text/plain" },
       body: token.id
     });
 
-    if (response.ok) this.setState({complete: true});
+    if (response.ok) this.setState({ complete: true });
   }
 
   render() {
